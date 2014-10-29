@@ -49,6 +49,13 @@ public class LoginPanel extends JPanel  {
 		add(passwordField);
 		
 		JButton btnConectar = new JButton("Conectar");
+		btnConectar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PrincipalPanel pp = new PrincipalPanel(owner);
+				owner.setContentPane(pp);
+				owner.setSize(pp.getSize());
+			}
+		});
 		btnConectar.setBounds(144, 175, 89, 23);
 		add(btnConectar);
 		
@@ -57,7 +64,6 @@ public class LoginPanel extends JPanel  {
 		add(separator);
 		
 		/** Ir al panel de recuperación **/
-		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		panel.setBounds(20, 244, 221, 68);
