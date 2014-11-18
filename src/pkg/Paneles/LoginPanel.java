@@ -52,9 +52,10 @@ public class LoginPanel extends JPanel  {
 		btnConectar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PrincipalPanel pp = new PrincipalPanel(owner);
+				
 				owner.setContentPane(pp);
 				owner.setSize(pp.getSize());
-			}
+				}
 		});
 		btnConectar.setBounds(144, 175, 89, 23);
 		add(btnConectar);
