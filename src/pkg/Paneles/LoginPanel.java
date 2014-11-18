@@ -14,6 +14,8 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import pkg.DAO.DAO;
+import pkg.DAO.UsuarioDAO;
 import pkg.Database.SQLConnector;
 import pkg.Frames.*;
 
@@ -61,21 +63,8 @@ public class LoginPanel extends JPanel  {
 		JButton btnConectar = new JButton("Conectar");
 		btnConectar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					CallableStatement cblogin = owner.getConnector().getConnection().prepareCall("{call login_rowcount(?, ?, ?)}");
-					cblogin.registerOutParameter(1, java.sql.Types.INTEGER);
-					cblogin.setString(2, txtUsuario.getText());
-					cblogin.setString(3, new String(txtPassword.getPassword()));
-					cblogin.execute();
-					
-					if(cblogin.getInt(1) < 1) {
-						
-					}
-					
-				} catch (SQLException e) {
-					// TODO Bloque catch generado automáticamente
-					e.printStackTrace();
-				}
+				DAO usuariodao = new UsuarioDAO(owner.getConnector().getConnection(), txtUsuario.getText(), new String(txtPassword.getPassword()));
+				
 			}
 		});
 		btnConectar.setBounds(144, 175, 89, 23);
