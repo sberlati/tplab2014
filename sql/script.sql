@@ -2,8 +2,8 @@
 /*
  Empienza bloque para creación de las tablas
  */
-USE asistencias
-IF EXISTS(us
+USE Quinto3
+
 CREATE TABLE usuarios (
 	id_usuario int IDENTITY(1,1) PRIMARY KEY,
 	id_preceptor int not null,
@@ -79,6 +79,14 @@ CREATE PROCEDURE login_get_password
 	SELECT clave_acceso FROM usuarios WHERE nombre_usuario = @nombre
 	
 
+--LOGIN. Iniciar sesión
+GO
+CREATE PROCEDURE login_process
+	@nombre varchar(30),
+	@password varchar(max)
+	AS
+	SELECT id_usuario, id_preceptor, nombre_usuario, clave_acceso, ult_acceso, email FROM usuarios WHERE nombre_usuario = @nombre AND clave_acceso = @password
+ 
 --USER. Cambiar la fecha del último acceso por la actual.
 GO
 CREATE PROCEDURE user_set_lastOnline
