@@ -66,11 +66,11 @@ public class LoginPanel extends JPanel  {
 					cblogin.registerOutParameter(1, java.sql.Types.INTEGER);
 					cblogin.setString(2, txtUsuario.getText());
 					cblogin.setString(3, new String(txtPassword.getPassword()));
-					
-					
-
 					cblogin.execute();
-					System.out.println(cblogin.getInt(1));
+					
+					if(cblogin.getInt(1) < 1) {
+						
+					}
 					
 				} catch (SQLException e) {
 					// TODO Bloque catch generado automáticamente
