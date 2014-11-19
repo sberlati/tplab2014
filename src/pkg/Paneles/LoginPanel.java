@@ -2,22 +2,34 @@ package pkg.Paneles;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import pkg.DAO.DAO;
+import pkg.DAO.UsuarioDAO;
+import pkg.Database.SQLConnector;
 import pkg.Frames.*;
+
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginPanel extends JPanel  {
 	
-	private JTextField txtContrasea;
-	private JPasswordField passwordField;
+	private JTextField txtUsuario;
+	private JPasswordField txtPassword;
 	private FramePrincipal parent;
 	
 	public LoginPanel(FramePrincipal owner) {
@@ -34,26 +46,25 @@ public class LoginPanel extends JPanel  {
 		lblNombreDeUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(lblNombreDeUsuario);
 		
-		txtContrasea = new JTextField();
-		txtContrasea.setBounds(20, 144, 213, 20);
-		add(txtContrasea);
-		txtContrasea.setColumns(10);
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(20, 83, 213, 20);
+		add(txtUsuario);
+		txtUsuario.setColumns(10);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 		lblContrasea.setBounds(20, 119, 113, 14);
 		lblContrasea.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(lblContrasea);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(20, 83, 213, 20);
-		add(passwordField);
+		txtPassword = new JPasswordField();
+		txtPassword.setBounds(20, 144, 213, 20);
+		add(txtPassword);
 		
 		JButton btnConectar = new JButton("Conectar");
 		btnConectar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PrincipalPanel pp = new PrincipalPanel(owner);
-				owner.setContentPane(pp);
-				owner.setSize(pp.getSize());
+				DAO usuariodao = new UsuarioDAO(owner.getConnector().getConnection(), txtUsuario.getText(), new String(txtPassword.getPassword()));
+				
 			}
 		});
 		btnConectar.setBounds(144, 175, 89, 23);
