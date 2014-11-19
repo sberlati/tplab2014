@@ -14,8 +14,6 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import pkg.DAO.DAO;
-import pkg.DAO.UsuarioDAO;
 import pkg.Database.SQLConnector;
 import pkg.Frames.*;
 
@@ -63,7 +61,7 @@ public class LoginPanel extends JPanel  {
 		JButton btnConectar = new JButton("Conectar");
 		btnConectar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DAO usuariodao = new UsuarioDAO(owner.getConnector().getConnection(), txtUsuario.getText(), new String(txtPassword.getPassword()));
+
 				
 			}
 		});
