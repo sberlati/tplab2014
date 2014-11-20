@@ -15,11 +15,6 @@ import java.sql.*;
 import pkg.Database.*;
 
 public class FramePrincipal extends JFrame {
-	private SQLConnector conector = new SQLConnector("SERDATOS","Quinto3",1433);
-	
-	public SQLConnector getConnector() {
-		return this.conector;
-	}
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

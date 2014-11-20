@@ -1,15 +1,19 @@
 package pkg.Entidades;
 
+import java.sql.Date;
+
 public class Usuario {
 	private int		 id;
+	private int 	 idPreceptor;
 	private String	 nombre;
 	private int		 nivelAcceso;
-	private String	 ultimoAcceso;
+	private Date	 ultimoAcceso;
 	private String	 email;
 	
-	public Usuario(int id, String nombre, int nivelAcceso, String ultimoAcceso, String email) {
+	public Usuario(int id, String nombre, int idPreceptor,int nivelAcceso, Date ultimoAcceso, String email) {
 		this.id				 = id;
 		this.nombre			 = nombre;
+		this.idPreceptor 	 = idPreceptor;
 		this.nivelAcceso	 = nivelAcceso;
 		this.ultimoAcceso	 = ultimoAcceso;
 		this.email			 = email;
@@ -25,11 +29,15 @@ public class Usuario {
 		return this.nombre;
 	}
 	
+	public int getIdPreceptor() {
+		return this.idPreceptor;
+	}
+	
 	public int getNivelAcceso() {
 		return this.nivelAcceso;
 	}
 	
-	public String getUltimoAcceso() {
+	public Date getUltimoAcceso() {
 		return this.ultimoAcceso;
 	}
 	

@@ -6,9 +6,9 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 public class SQLConnector {
-	private String hostname;
-	private String database;
-	private int    port;
+	private String hostname	= "SERDATOS";
+	private String database	= "Quinto3";
+	private int    port		= 1433;
 	
 	private Connection conexion;
 	
@@ -24,10 +24,10 @@ public class SQLConnector {
 		return this.port;
 	}
 	
-	public SQLConnector(String hostname, String database, int port) {
-		this.hostname = hostname;
+	public SQLConnector(/*String hostname, String database, int port*/) {
+		/*this.hostname = hostname;
 		this.database = database;
-		this.port 	  = port;
+		this.port 	  = port;*/
 	}
 	
 	private String getConnectionString() {
