@@ -11,7 +11,7 @@ public class AlumnoDAO {
 	
 	public int obtenerFaltas(Alumno alumno) {
 		try {
-			CallableStatement proc = this.conector.getConnection().prepareCall("{call alumno_get_faltas(?,?)}");
+			CallableStatement proc = this.conector.getConnection().prepareCall("{call sp_alumno_get_faltas(?,?)}");
 			proc.setInt(1, alumno.getId());
 			proc.registerOutParameter(2, java.sql.Types.INTEGER);
 			proc.execute();
@@ -25,7 +25,7 @@ public class AlumnoDAO {
 	
 	public boolean registrarAlumno(Alumno alumno) {
 		try {
-			CallableStatement proc = this.conector.getConnection().prepareCall("{call alumno_register(?,?,?,?,?)}");
+			CallableStatement proc = this.conector.getConnection().prepareCall("{call sp_alumno_register(?,?,?,?,?)}");
 			proc.setInt(1, alumno.getIdDivision());
 			proc.setInt(2, alumno.getIdAno());
 			proc.setString(3, alumno.getNombre());
@@ -41,7 +41,7 @@ public class AlumnoDAO {
 	
 	public void rellenarAlumno(Alumno alumno) {
 		try {
-			CallableStatement proc = this.conector.getConnection().prepareCall("{call alumno_get_info(?,?,?,?,?,?)}");
+			CallableStatement proc = this.conector.getConnection().prepareCall("{call sp_alumno_get_info(?,?,?,?,?,?)}");
 			proc.registerOutParameter(1, java.sql.Types.INTEGER);//IdAlumno
 			proc.registerOutParameter(2, java.sql.Types.VARCHAR);//apellido
 			proc.registerOutParameter(3, java.sql.Types.INTEGER);//dni

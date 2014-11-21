@@ -30,7 +30,7 @@ public class NoticiaDAO {
 	public ArrayList<Noticia> listarNoticias() {
 		try {
 			ArrayList<Noticia> noticias = new ArrayList<Noticia>();
-			CallableStatement proc = this.conector.getConnection().prepareCall("{call noticia_get_noticias(?,?,?)}");
+			CallableStatement proc = this.conector.getConnection().prepareCall("{call sp_noticia_get_noticias(?,?,?)}");
 			proc.registerOutParameter(1, java.sql.Types.INTEGER);
 			proc.registerOutParameter(2, java.sql.Types.VARCHAR);
 			proc.registerOutParameter(3, java.sql.Types.DATE);
@@ -49,7 +49,7 @@ public class NoticiaDAO {
 	
 	public boolean agregarNoticia(Noticia noticia) {
 		try {
-			CallableStatement proc = this.conector.getConnection().prepareCall("{call noticia_agregar(?,?)}");
+			CallableStatement proc = this.conector.getConnection().prepareCall("{call sp_noticia_agregar(?,?)}");
 			proc.setString(1, noticia.getContenido());
 			proc.setDate(2, noticia.getFechaEmision());
 			proc.execute();

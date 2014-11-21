@@ -10,7 +10,7 @@ public class UsuarioDAO {
 	
 	public String obtenerPassword(String nombre) {
 		try {
-			CallableStatement proc = this.conector.getConnection().prepareCall("{call login_get_password(?,?)}");
+			CallableStatement proc = this.conector.getConnection().prepareCall("{call sp_login_get_password(?,?)}");
 			proc.registerOutParameter(1, java.sql.Types.VARCHAR);
 			proc.setString(2, nombre);
 			
@@ -27,7 +27,7 @@ public class UsuarioDAO {
 	
 	public void rellenarUsuario(Usuario usuario) {
 		try {
-			CallableStatement proc = this.conector.getConnection().prepareCall("{call user_get_info(?,?,?,?,?,?)}");
+			CallableStatement proc = this.conector.getConnection().prepareCall("{call sp_user_get_info(?,?,?,?,?,?)}");
 			proc.setString(1,usuario.getNombre());
 			proc.registerOutParameter(2, java.sql.Types.INTEGER); //Id de usuario
 			proc.registerOutParameter(3, java.sql.Types.INTEGER); //Id de preceptor
@@ -48,7 +48,7 @@ public class UsuarioDAO {
 	
 	public boolean registrarUsuario(int id_preceptor, String nombre, String password, int nivelAcceso, String email) {
 		try {
-			CallableStatement proc = this.conector.getConnection().prepareCall("{call user_register(?,?,?,?,?,?)}");
+			CallableStatement proc = this.conector.getConnection().prepareCall("{call sp_user_register(?,?,?,?,?,?)}");
 			proc.setInt(1, id_preceptor);
 			proc.setString(2, nombre);
 			proc.setString(3, password);
