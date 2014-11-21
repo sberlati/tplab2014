@@ -26,6 +26,7 @@ import java.awt.Component;
 
 import javax.swing.Box;
 
+import pkg.Entidades.Usuario;
 import pkg.Frames.FramePrincipal;
 
 import java.awt.Dimension;
@@ -43,20 +44,22 @@ import javax.swing.JTable;
 
 import java.awt.SystemColor;
 import java.awt.FlowLayout;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.BoxLayout;
 
 public class PrincipalPanel extends JPanel {
 	private JTable table;
 
-	public PrincipalPanel(FramePrincipal owner) {
-		setSize(800,600);
+	public PrincipalPanel(FramePrincipal owner, Usuario usuario) {
 		setLayout(null);
-		
+		setSize(800,600);
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 780, 92);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -64,12 +67,12 @@ public class PrincipalPanel extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblBienvenidoaAnnimo = new JLabel("Bienvenido/a, An\u00F3nimo");
+		JLabel lblBienvenidoaAnnimo = new JLabel("Bienvenido/a, " + usuario.getNombre());
 		lblBienvenidoaAnnimo.setFont(new Font("Calibri", Font.PLAIN, 24));
 		lblBienvenidoaAnnimo.setBounds(10, 11, 267, 42);
 		panel.add(lblBienvenidoaAnnimo);
 		
-		JLabel lblTultimaFecha = new JLabel("Tu \u00FAltima fecha de acceso fue el 27/10/2014.");
+		JLabel lblTultimaFecha = new JLabel("Tu \u00FAltima fecha de acceso fue el " + usuario.getUltimoAcceso() + ".");
 		lblTultimaFecha.setBounds(10, 53, 352, 14);
 		panel.add(lblTultimaFecha);
 		
@@ -141,7 +144,7 @@ public class PrincipalPanel extends JPanel {
 		panel_1.add(panel_5);
 		panel_5.setLayout(null);
 		
-		JLabel lblNotasDelDa = new JLabel("Notas e informes");
+		JLabel lblNotasDelDa = new JLabel("Noticias");
 		lblNotasDelDa.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNotasDelDa.setBounds(10, 11, 305, 45);
 		panel_5.add(lblNotasDelDa);
@@ -154,9 +157,11 @@ public class PrincipalPanel extends JPanel {
 		btnRefrescar.setBounds(325, 20, 91, 23);
 		panel_5.add(btnRefrescar);
 		
-		JLabel lblNoHayContenido = new JLabel("No hay contenido. Preciona \"Actualizar\" para ver si aparece algo nuevo.");
-		lblNoHayContenido.setBounds(10, 97, 406, 59);
-		panel_5.add(lblNoHayContenido);
+		JPanel panel_13 = new JPanel();
+		panel_13.setBackground(new Color(176, 196, 222));
+		panel_13.setBounds(10, 61, 406, 304);
+		panel_5.add(panel_13);
+		panel_13.setLayout(new BoxLayout(panel_13, BoxLayout.X_AXIS));
 		
 		
 		JPanel panel_2 = new JPanel();

@@ -14,7 +14,9 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import pkg.DAO.UsuarioDAO;
 import pkg.Database.SQLConnector;
+import pkg.Entidades.Usuario;
 import pkg.Frames.*;
 
 import javax.swing.border.LineBorder;
@@ -58,11 +60,34 @@ public class LoginPanel extends JPanel  {
 		txtPassword.setBounds(20, 144, 213, 20);
 		add(txtPassword);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(20, 209, 221, 29);
+		panel_1.setVisible(false);
+		add(panel_1);
+		
+		JLabel lblLosDatosNo = new JLabel("Los datos no son correctos");
+		panel_1.add(lblLosDatosNo);
+		lblLosDatosNo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLosDatosNo.setFont(new Font("Calibri", Font.BOLD, 13));
+		lblLosDatosNo.setForeground(new Color(255, 0, 0));
+		
 		JButton btnConectar = new JButton("Conectar");
 		btnConectar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				
+				UsuarioDAO udao = new UsuarioDAO();
+				if(udao.usuarioExiste(txtUsuario.getText())) {
+					System.out.println(udao.obtenerPassword(txtUsuario.getText()));
+					if(udao.obtenerPassword(txtUsuario.getText()).equals(new String(txtPassword.getPassword()))) {
+						Usuario usuario = new Usuario(0,txtUsuario.getText(),0,0,null, null);
+						PrincipalPanel pp = new PrincipalPanel(owner, usuario);
+						owner.setContentPane(pp);
+						owner.setSize(pp.getSize());
+					}else{
+						panel_1.setVisible(true);
+					}
+				}else{
+					panel_1.setVisible(true);
+				}
 			}
 		});
 		btnConectar.setBounds(144, 175, 89, 23);
@@ -86,6 +111,7 @@ public class LoginPanel extends JPanel  {
 		JButton btnClickAqu = new JButton("Click aqu\u00ED");
 		btnClickAqu.setBounds(59, 36, 89, 23);
 		panel.add(btnClickAqu);
+		
 		btnClickAqu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoginRecoverPanel recoverpanel = new LoginRecoverPanel(owner);

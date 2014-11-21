@@ -10,9 +10,7 @@ import javax.swing.border.EmptyBorder;
 import pkg.Paneles.*;
 
 import java.awt.Dimension;
-import java.sql.*;
 
-import pkg.Database.*;
 
 public class FramePrincipal extends JFrame {
 	
@@ -29,7 +27,7 @@ public class FramePrincipal extends JFrame {
 		});
 	}
 	
-	public FramePrincipal() throws SQLException {
+	public FramePrincipal() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 260, 367);

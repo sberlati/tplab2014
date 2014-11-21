@@ -13,13 +13,10 @@ public class UsuarioDAO {
 			CallableStatement proc = this.conector.getConnection().prepareCall("{call sp_login_get_password(?,?)}");
 			proc.registerOutParameter(1, java.sql.Types.VARCHAR);
 			proc.setString(2, nombre);
+			proc.execute();
 			
-			ResultSet resultado = proc.executeQuery();
-			if(resultado.next()) {
-				return resultado.getString("clave_acceso");
-			}else{
-				return null;
-			}
+			return proc.getString(1);
+			
 		} catch(SQLException e) {
 			return null;
 		}
@@ -62,5 +59,21 @@ public class UsuarioDAO {
 		return true;
 	}
 	
-	
+	public boolean usuarioExiste(String nombre) {
+		try {
+			CallableStatement proc = this.conector.getConnection().prepareCall("{call login_check_userExist(?,?)}");
+			proc.registerOutParameter(1, java.sql.Types.INTEGER);
+			proc.setString(2, nombre);
+			proc.execute();
+			
+			if(proc.getInt(1) > 0) {
+				return true;
+			}else{
+				return false;
+			}
+		} catch(SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
 }
