@@ -5,12 +5,16 @@ public class Alumno {
 	private String	 nombre;
 	private String	 apellido;
 	private int		 dni;
+	private int		 idDivision;
+	private int 	 idAno;
 	
-	public Alumno(int id, String nombre, String apellido, int dni) {
+	public Alumno(int id, String nombre, String apellido, int dni, int idDivision, int idAno) {
 		this.id			 = id;
-		this.nombre		 =	 nombre;
-		this.apellido	 = apellido;
-		this.dni		 = dni;
+		this.nombre		 = nombre;
+		this.setApellido(apellido);
+		this.setDni(dni);
+		this.setIdDivision(idDivision);
+		this.setIdAno(idAno);
 	}
 	
 	/* Encapsulamiento */
@@ -30,9 +34,34 @@ public class Alumno {
 		return this.dni;
 	}
 	
-	/* TODO: Métodos de la entidad */
-	
-	public int obtenerFaltas() {
-		return 0;
+	public int getIdDivision() {
+		return this.idDivision;
 	}
+	
+	public int getIdAno() {
+		return this.idAno;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+
+	public void setIdDivision(int idDivision) {
+		this.idDivision = idDivision;
+	}
+
+	public void setIdAno(int idAno) {
+		this.idAno = idAno;
+	}
+	
+	
 }
+ 

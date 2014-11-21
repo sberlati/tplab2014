@@ -59,3 +59,42 @@ AS
 BEGIN
 	INSERT INTO noticias VALUE(@contenido, @fechaEmision)
 END 
+
+--Obtener faltas de un alumno
+CREATE PROCEDURE alumno_get_faltas
+@idAlumno int,
+@faltas int OUTPUT
+AS
+BEGIN
+	SELECT @faltas=COUNT(*) FROM parte_diario WHERE id_alumno=@idAlumno
+END 
+
+--Insertar un nuevo alumno
+CREATE PROCEDURE alumno_register
+@idDivision int,
+@idAno int,
+@nombre varchar(30),
+@apellido varchar(30),
+@dni int
+AS
+BEGIN
+	INSERT INTO alumno VALES(@idDivision, @idAno, @nombre, @apellido, @dni)
+END 
+
+--Obtener info de un alumno
+CREATE PROCEDURE alumno_get_info
+@idAlumno int OUTPUT,
+@apellido varchar(30) OUTPUT,
+@dni int OUTPUT,
+@idDivision int OUTPUT,
+@idAno int OUTPUT,
+@nombre varchar(30)
+AS
+BEGIN
+	SELECT @idAlumno=id_alumno,
+		   @idDivision=id_division,
+		   @idAno=id_ano,
+		   @apellido=apellido,
+		   @dni=dni
+	WHERE nombre=@nombre
+END 
