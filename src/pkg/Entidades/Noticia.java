@@ -1,11 +1,13 @@
 package pkg.Entidades;
 
+import java.sql.Date;
+
 public class Noticia {
 	private int id;
 	private String contenido;
-	private String fechaEmision;
+	private Date fechaEmision;
 	
-	public Noticia( int id, String contenido, String fechaEmision) {
+	public Noticia( int id, String contenido, Date fechaEmision) {
 		this.id				 = id;
 		this.contenido		 = contenido;
 		this.fechaEmision	 = fechaEmision;
@@ -20,7 +22,7 @@ public class Noticia {
 		return this.contenido;
 	}
 	
-	public String getFechaEmision() {
+	public Date getFechaEmision() {
 		return this.fechaEmision;
 	}
 	

@@ -38,3 +38,24 @@ AS
 BEGIN
 	INSERT INTO usuarios VALUES (@idPreceptor, @nombre, @claveAcceso, @nivelAcceso, @ultimoAcceso, @email)
 END 
+
+
+--Obtiene las noticias por orden descendente
+CREATE PROCEDURE noticia_get_noticias
+@id int OUTPUT,
+@contenido varchar(max) OUTPUT,
+@fechaEmision date OUTPUT
+AS
+BEGIN
+	SELECT @id=id_noticia, @contenido=contenido, @fechaEmision=fecha_emision FROM noticias ORDER BY fecha_emision DESC
+END 
+
+
+--Agrega una noticia
+CREATE PROCEDURE noticia_agregar
+@contenido varchar(max),
+@fechaEmision date
+AS
+BEGIN
+	INSERT INTO noticias VALUE(@contenido, @fechaEmision)
+END 

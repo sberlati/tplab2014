@@ -51,7 +51,7 @@ CREATE TABLE division (
 CREATE TABLE noticias (
 	id_noticia int IDENTITY(1,1) PRIMARY KEY,
 	contenido varchar(max) not null,
-	fecha_emision datetime not null
+	fecha_emision date not null
 )
 
 /*
