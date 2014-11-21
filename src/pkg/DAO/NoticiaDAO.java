@@ -2,7 +2,7 @@
                   |ZZzzz
                  |
                  |
-    |ZZzzz      /^\            |ZZzzz			Te hice un castillo en ascii (mentiranolohiceyo).
+    |ZZzzz      /^\            |ZZzzz			
     |          |~~~|           |
     |        |^^^^^^^|        / \
    /^\       |[]+    |       |~~~|

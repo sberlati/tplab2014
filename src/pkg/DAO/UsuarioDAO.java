@@ -25,21 +25,24 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public Usuario generarUsuario(String nombre) {
+	public void rellenarUsuario(Usuario usuario) {
 		try {
 			CallableStatement proc = this.conector.getConnection().prepareCall("{call user_get_info(?,?,?,?,?,?)}");
-			proc.setString(1, nombre);
+			proc.setString(1,usuario.getNombre());
 			proc.registerOutParameter(2, java.sql.Types.INTEGER); //Id de usuario
 			proc.registerOutParameter(3, java.sql.Types.INTEGER); //Id de preceptor
 			proc.registerOutParameter(4, java.sql.Types.INTEGER); //nivel de acceso
 			proc.registerOutParameter(5, java.sql.Types.DATE);	  //ultimo acceso
 			proc.registerOutParameter(6, java.sql.Types.VARCHAR); //email
 			
-			ResultSet resultado = proc.executeQuery();
-			Usuario retorno = new Usuario(resultado.getInt(2), nombre, resultado.getInt(3), resultado.getInt(4), resultado.getDate(5), resultado.getString(6));
-			return retorno;
+			usuario.setId(proc.getInt(2));
+			usuario.setIdPreceptor(proc.getInt(3));
+			usuario.setNivelAcceso(proc.getInt(4));
+			usuario.setUltimoAcceso(proc.getDate(5));
+			usuario.setEmail(proc.getString(6));
+			
 		} catch(SQLException e) {
-			return null;
+			System.out.println(e.getMessage());
 		}
 	}
 	

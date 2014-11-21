@@ -11,12 +11,12 @@ public class Usuario {
 	private String	 email;
 	
 	public Usuario(int id, String nombre, int idPreceptor,int nivelAcceso, Date ultimoAcceso, String email) {
-		this.id				 = id;
-		this.nombre			 = nombre;
-		this.idPreceptor 	 = idPreceptor;
-		this.nivelAcceso	 = nivelAcceso;
-		this.ultimoAcceso	 = ultimoAcceso;
-		this.email			 = email;
+		this.setId(id);
+		this.setNombre(nombre);
+		this.setIdPreceptor(idPreceptor);
+		this.setNivelAcceso(nivelAcceso);
+		this.setUltimoAcceso(ultimoAcceso);
+		this.setEmail(email);
 	}
 	
 	/* Encapsulamiento */
@@ -44,9 +44,29 @@ public class Usuario {
 	public String getEmail() {
 		return this.email;
 	}
-	
-	/* TODO: Metodos de la entidad */
-	public void actualizarUltimoAcceso() {
-		
+
+	public void setId(int id) {
+		this.id = id;
 	}
+
+	public void setIdPreceptor(int idPreceptor) {
+		this.idPreceptor = idPreceptor;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setNivelAcceso(int nivelAcceso) {
+		this.nivelAcceso = nivelAcceso;
+	}
+
+	public void setUltimoAcceso(Date ultimoAcceso) {
+		this.ultimoAcceso = ultimoAcceso;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 }
