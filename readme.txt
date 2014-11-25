@@ -1,11 +1,12 @@
-Manual de instalaciÛn:
+###Trabajo Pr√°ctico final Lab 2014
+Manual de instalaci√≥n:
 Requerimientos:
 1- Microsoft SQL JDBC 4.0
 
 Pasos:
 1- Crear una base de datos con el nombre deseado.
-2- Ejecutar el script "schema final.sql" que est· en la carpeta sql
-3- Importar el proyecto en Eclipse y configurar la vÌa de construcciÛn del proyecto.
+2- Ejecutar el script "schema final.sql" que est√° en la carpeta sql
+3- Importar el proyecto en Eclipse y configurar la v√≠a de construcci√≥n del proyecto.
 4- Ir al paquete "pkg.Database" y abrir el archivo "SQLConnector.java" y rellenar los campos con los datos correspondientes:
 
 	> String  hostname 	     : Host del servidor SQL Server.
@@ -15,4 +16,4 @@ Pasos:
 
 	>>>>>>  Si integratedSecurity es FALSE
 	        > String username    : Nombre de usuario para entrar al servidor.
-	        > String password    : ContraseÒa del usuario para entrar al servidor.
+	        > String password    : Contrase√±a del usuario para entrar al servidor.
