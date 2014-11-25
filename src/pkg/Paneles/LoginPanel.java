@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 
 import pkg.DAO.UsuarioDAO;
 import pkg.Database.SQLConnector;
-import pkg.Entidades.Usuario;
+import pkg.Entidades.Preceptor;
 import pkg.Frames.*;
 
 import javax.swing.border.LineBorder;
@@ -75,7 +75,7 @@ public class LoginPanel extends JPanel  {
 				UsuarioDAO udao = new UsuarioDAO();
 				if(udao.usuarioExiste(txtUsuario.getText())) { //Checkeo si el usuario existe	
 					if(udao.obtenerPassword(txtUsuario.getText()).equals(new String(txtPassword.getPassword()))) { //Si las contraseñas coinciden
-						Usuario usuario = new Usuario(0,txtUsuario.getText(),0,0,null, null);
+						Preceptor usuario = new Preceptor(0,txtUsuario.getText(),0,0,null, null);
 						PrincipalPanel pp = new PrincipalPanel(owner, usuario);
 						owner.setContentPane(pp);
 						owner.setSize(pp.getSize());

@@ -2,7 +2,7 @@ package pkg.Entidades;
 
 import java.sql.Date;
 
-public class Usuario {
+public class Preceptor {
 	private int		 id;
 	private int 	 idPreceptor;
 	private String	 nombre;
@@ -10,7 +10,7 @@ public class Usuario {
 	private Date	 ultimoAcceso;
 	private String	 email;
 	
-	public Usuario(int id, String nombre, int idPreceptor,int nivelAcceso, Date ultimoAcceso, String email) {
+	public Preceptor(int id, String nombre, int idPreceptor,int nivelAcceso, Date ultimoAcceso, String email) {
 		this.setId(id);
 		this.setNombre(nombre);
 		this.setIdPreceptor(idPreceptor);

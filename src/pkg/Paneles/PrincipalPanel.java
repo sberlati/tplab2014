@@ -6,6 +6,7 @@ import java.awt.Color;
 
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.JLabel;
 
 import java.awt.Font;
@@ -26,7 +27,9 @@ import java.awt.Component;
 
 import javax.swing.Box;
 
-import pkg.Entidades.Usuario;
+import pkg.DAO.CursoDAO;
+import pkg.Entidades.Curso;
+import pkg.Entidades.Preceptor;
 import pkg.Frames.FramePrincipal;
 
 import java.awt.Dimension;
@@ -55,8 +58,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BoxLayout;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JTextField;
+
 import com.toedter.calendar.JDateChooser;
 
 public class PrincipalPanel extends JPanel {
@@ -70,7 +76,7 @@ public class PrincipalPanel extends JPanel {
 	private JTextField textField_6;
 	private JTextField textField_7;
 
-	public PrincipalPanel(FramePrincipal owner, Usuario usuario) {
+	public PrincipalPanel(FramePrincipal owner, Preceptor usuario) {
 		setLayout(null);
 		setSize(800,588);
 		JPanel panel = new JPanel();
@@ -84,15 +90,6 @@ public class PrincipalPanel extends JPanel {
 		lblBienvenidoaAnnimo.setFont(new Font("Calibri", Font.PLAIN, 24));
 		lblBienvenidoaAnnimo.setBounds(10, 11, 267, 42);
 		panel.add(lblBienvenidoaAnnimo);
-		
-		JLabel lblTultimaFecha = new JLabel("Tu \u00FAltima fecha de acceso fue el " + usuario.getUltimoAcceso() + ".");
-		lblTultimaFecha.setBounds(10, 53, 352, 14);
-		panel.add(lblTultimaFecha);
-		
-		JLabel label = new JLabel("13:24 - 27/10/2014");
-		label.setHorizontalAlignment(SwingConstants.RIGHT);
-		label.setBounds(376, 11, 252, 14);
-		panel.add(label);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar sesi\u00F3n");
 		btnCerrarSesin.addActionListener(new ActionListener() {
@@ -200,6 +197,11 @@ public class PrincipalPanel extends JPanel {
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setBounds(135, 7, 256, 22);
+		CursoDAO cdao = new CursoDAO();
+		
+		for(Curso c : cdao.obtenerCursos()) {
+			comboBox_1.addItem(c.getAsCadena());
+		}
 		panel_6.add(comboBox_1);
 		
 		JButton btnCargar = new JButton("Cargar");
@@ -210,7 +212,11 @@ public class PrincipalPanel extends JPanel {
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		table.setBackground(Color.WHITE);
 		table.setBounds(10, 111, 755, 276);
+		DefaultTableModel dtm = new DefaultTableModel(new Object[]{"Nombre", "Apellido", "Faltas"}, 0);
+		table.setModel(dtm);
 		panel_2.add(table);
+		
+		//Carga el JTable
 		
 		JPanel panel_7 = new JPanel();
 		panel_7.setBackground(new Color(176, 196, 222));
@@ -539,11 +545,12 @@ public class PrincipalPanel extends JPanel {
 		panel_20.add(lblTodoListo);
 		
 		JButton btnAgregarAlSistema = new JButton("Agregar al sistema");
-		btnAgregarAlSistema.setBounds(166, 106, 121, 23);
+		btnAgregarAlSistema.setBounds(10, 106, 277, 23);
 		panel_20.add(btnAgregarAlSistema);
 	
 		
 	}
+	
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -561,4 +568,6 @@ public class PrincipalPanel extends JPanel {
 			}
 		});
 	}
+	
+	
 }

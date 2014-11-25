@@ -6,11 +6,14 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 public class SQLConnector {
-	private String hostname	= "SEBA-PC";
-	private String database	= "asistencias";
+	private String hostname	= "SERDATOS";
+	private String database	= "Quinto3";
 	private int    port		= 1433;
-	private boolean integratedSecurity = false;
+	private boolean integratedSecurity = true;
 	private Connection conexion;
+	
+	private String username;
+	private String password;
 	
 	private String getHostname() {
 		return this.hostname;

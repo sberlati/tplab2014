@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import pkg.Database.SQLConnector;
-import pkg.Entidades.Usuario;
+import pkg.Entidades.Preceptor;
 import pkg.Utiles.ErrorDialog;
 
 public class UsuarioDAO {
@@ -25,7 +25,7 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public void rellenarUsuario(Usuario usuario) {
+	public void rellenarUsuario(Preceptor usuario) {
 		try {
 			CallableStatement proc = this.conector.getConnection().prepareCall("{call user_get_info(?,?,?,?,?,?)}");
 			proc.setString(1,usuario.getNombre());
@@ -81,13 +81,13 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public ArrayList<Usuario> obtenerPreceptores() {
+	public ArrayList<Preceptor> obtenerPreceptores() {
 		try {
-			ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+			ArrayList<Preceptor> usuarios = new ArrayList<Preceptor>();
 			CallableStatement proc = this.conector.getConnection().prepareCall("{call users_get_preceptores}");
 			ResultSet resultado = proc.executeQuery();
 			while(resultado.next()) {
-				usuarios.add(new Usuario(resultado.getInt("id_usuario"),resultado.getString("nombre_usuario"), resultado.getInt("id_preceptor"),
+				usuarios.add(new Preceptor(resultado.getInt("id_usuario"),resultado.getString("nombre_usuario"), resultado.getInt("id_preceptor"),
 										 resultado.getInt("nivel_acceso"), resultado.getDate("ult_acceso"), resultado.getString("email")));
 			}
 			return usuarios;
@@ -97,7 +97,7 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public void modificarUsuario(Usuario usuario) {
+	public void modificarUsuario(Preceptor usuario) {
 		try {
 			CallableStatement proc = this.conector.getConnection().prepareCall("{call login_check_userExist(?,?)}");
 			proc.registerOutParameter(1, java.sql.Types.INTEGER);
@@ -121,7 +121,7 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public void modificarPassword(Usuario master, Usuario usuario, String nuevaContrasena) {
+	public void modificarPassword(Preceptor master, Preceptor usuario, String nuevaContrasena) {
 		if(master.getNivelAcceso() >= 2) {
 			try {
 				CallableStatement proc = this.conector.getConnection().prepareCall("{call user_modificar_password(?,?)}");
@@ -133,11 +133,11 @@ public class UsuarioDAO {
 				new ErrorDialog("Excepción SQL", e.getMessage());
 			}
 		}else{
-			new ErrorDialog("Error de permisos", "El usuario de esta sesión no tiene permisos suficientes para ejecutar esta acción (UsuarioDAO.java - 135).");
+			new ErrorDialog("Error de permisos", "El usuario de esta sesión no tiene permisos suficientes para ejecutar esta acción (UsuarioDAO.java).");
 		}
 	}
 	
-	public void eliminarUsuario(Usuario master, Usuario usuario) {
+	public void eliminarUsuario(Preceptor master, Preceptor usuario) {
 		if(master.getNivelAcceso() >= 2) {
 			try {
 				CallableStatement proc = this.conector.getConnection().prepareCall("{call usuario_delete(?)}");
@@ -146,6 +146,37 @@ public class UsuarioDAO {
 			} catch(SQLException e) {
 				new ErrorDialog("Excepción SQL", e.getMessage());
 			}
+		}else{
+			new ErrorDialog("Error de permisos", "El usuario de esta sesión no tiene permisos suficientes para ejecutar esta acción (UsuarioDAO.java).");
 		}
 	}
+	
+	public void suspenderUsuario(Preceptor master, Preceptor usuario) {
+		if(master.getNivelAcceso() >= 2) {
+			try {
+				CallableStatement proc = this.conector.getConnection().prepareCall("{call user_suspender(?)}");
+				proc.setInt(1, usuario.getId());
+				proc.execute();
+			} catch(SQLException e) {
+				new ErrorDialog("Excepción SQL", e.getMessage());
+			}
+		}else{
+			new ErrorDialog("Error de permisos", "El usuario de esta sesión no tiene permisos suficientes para ejecutar esta acción (UsuarioDAO.java).");
+		}
+	}
+	
+	public void quitarSuspension(Preceptor master, Preceptor usuario) {
+		if(master.getNivelAcceso() >= 2) {
+			try {
+				CallableStatement proc = this.conector.getConnection().prepareCall("{call user_quitar_suspension(?)}");
+				proc.setInt(1, usuario.getId());
+				proc.execute();
+			}catch(SQLException e) {
+				new ErrorDialog("Excepción SQL", e.getMessage());
+			}
+		}else{
+			new ErrorDialog("Error de permisos", "El usuario de esta sesión no tiene permisos suficientes para ejecutar esta acción (UsuarioDAO.java).");
+		}
+	}
+	
 }

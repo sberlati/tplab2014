@@ -65,8 +65,8 @@ public class AlumnoDAO {
 	}
 	
 	public ArrayList<Alumno> obtenerAlumnosPorCurso(Curso curso) {
+		ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
 		try {
-			ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
 			CallableStatement proc = this.conector.getConnection().prepareCall("{call alumno_por_curso(?,?)}");
 			proc.setInt(1, curso.getIdAno());
 			proc.setInt(2, curso.getIdDivision());
@@ -78,11 +78,12 @@ public class AlumnoDAO {
 									   resultado.getInt("id_division"), resultado.getInt("id_ano")));
 			}
 			
-			return alumnos;
+			
 		} catch(SQLException e) {
 			new ErrorDialog("Excepción SQL", e.getMessage());
-			return null;
+			
 		}
+		return alumnos;
 	}
 	
 	/*
