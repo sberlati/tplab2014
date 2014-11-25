@@ -15,7 +15,7 @@ public class CursoDAO {
 		try {
 			CallableStatement proc = this.conector.getConnection().prepareCall("{call cursos_cargar}");
 			ResultSet resultado = proc.executeQuery();
-			
+		
 			while(resultado.next()) {
 				cursos.add(new Curso(resultado.getInt("id_division"), resultado.getInt("id_ano"), resultado.getInt("num_ano"), resultado.getInt("num_division")));
 			}

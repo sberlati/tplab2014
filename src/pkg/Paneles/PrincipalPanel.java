@@ -60,6 +60,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.BoxLayout;
 
 import java.awt.GridBagLayout;
+import java.util.Vector;
 
 import javax.swing.JTextField;
 
@@ -195,16 +196,24 @@ public class PrincipalPanel extends JPanel {
 		lblSeleccionaUnCurso.setBounds(10, 11, 127, 14);
 		panel_6.add(lblSeleccionaUnCurso);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(135, 7, 256, 22);
+		Vector modelo = new Vector();
 		CursoDAO cdao = new CursoDAO();
 		
 		for(Curso c : cdao.obtenerCursos()) {
-			comboBox_1.addItem(c.getAsCadena());
+			modelo.addElement(c);
 		}
+		
+		JComboBox comboBox_1 = new JComboBox(modelo);
+		comboBox_1.setBounds(135, 7, 256, 22);
+		
 		panel_6.add(comboBox_1);
 		
 		JButton btnCargar = new JButton("Cargar");
+		btnCargar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btnCargar.setBounds(403, 7, 91, 23);
 		panel_6.add(btnCargar);
 		
