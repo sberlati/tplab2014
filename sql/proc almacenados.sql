@@ -98,3 +98,25 @@ BEGIN
 		   @dni=dni
 	WHERE nombre=@nombre
 END 
+
+--Checkeo si el usuario existe
+CREATE PROCEDURE sp_login_check_userExist
+@existe int OUTPUT,
+@nombre varchar(30)
+AS
+BEGIN
+	SELECT @existe=COUNT(*) FROM usuarios WHERE nombre=@nombre
+END 
+
+--Si hay noticias para mostrar
+CREATE PROCEDURE noticias_existentes
+@cantidad int OUTPUT
+AS
+BEGIN
+	SELECT @cantidad=COUNT(*) FROM noticias
+END 
+
+
+
+
+

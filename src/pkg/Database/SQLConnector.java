@@ -6,10 +6,10 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 public class SQLConnector {
-	private String hostname	= "SERDATOS";
-	private String database	= "Quinto3";
+	private String hostname	= "SEBA-PC";
+	private String database	= "asistencias";
 	private int    port		= 1433;
-	
+	private boolean integratedSecurity = false;
 	private Connection conexion;
 	
 	private String getHostname() {
@@ -24,19 +24,21 @@ public class SQLConnector {
 		return this.port;
 	}
 	
-	public SQLConnector(/*String hostname, String database, int port*/) {
-		/*this.hostname = hostname;
-		this.database = database;
-		this.port 	  = port;*/
+	private boolean getIntegratedSecurity() {
+		return this.integratedSecurity;
 	}
 	
-	private String getConnectionString() {
-		return "jdbc:sqlserver://" + getHostname() + ":"+ getPort() +";databaseName="+ getDatabase() +";integratedSecurity=true";
+	private String getConnectionString() { 
+		return "jdbc:sqlserver://" + getHostname() + ":" + getPort() + ";databaseName=" + getDatabase() + ";integratedSecurity=" + getIntegratedSecurity();
 	}
 	
 	public Connection getConnection() {
 		try {
-			this.conexion = DriverManager.getConnection(this.getConnectionString());
+			if(!getIntegratedSecurity())
+				this.conexion = DriverManager.getConnection(this.getConnectionString(),"Admin", "pelotas");
+			else
+				this.conexion = DriverManager.getConnection(this.getConnectionString());
+			
 			if(this.conexion != null)
 				System.out.println("Conexión con la base de datos establecida.");
 		} catch (Exception e) {

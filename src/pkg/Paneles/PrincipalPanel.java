@@ -42,6 +42,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 
+import java.awt.BorderLayout;
 import java.awt.SystemColor;
 import java.awt.FlowLayout;
 
@@ -52,14 +53,26 @@ import javax.swing.JPopupMenu;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.BoxLayout;
+import java.awt.GridBagLayout;
+import javax.swing.JTextField;
+import com.toedter.calendar.JDateChooser;
 
 public class PrincipalPanel extends JPanel {
 	private JTable table;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
 
 	public PrincipalPanel(FramePrincipal owner, Usuario usuario) {
 		setLayout(null);
-		setSize(800,600);
+		setSize(800,588);
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 780, 92);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -152,17 +165,22 @@ public class PrincipalPanel extends JPanel {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(10, 54, 406, 17);
 		panel_5.add(separator_1);
-		
-		JButton btnRefrescar = new JButton("Actualizar");
-		btnRefrescar.setBounds(325, 20, 91, 23);
-		panel_5.add(btnRefrescar);
-		
+				
 		JPanel panel_13 = new JPanel();
 		panel_13.setBackground(new Color(176, 196, 222));
 		panel_13.setBounds(10, 61, 406, 304);
 		panel_5.add(panel_13);
 		panel_13.setLayout(new BoxLayout(panel_13, BoxLayout.X_AXIS));
+		panel_13.add(new NoticiasPanel());
 		
+		JButton btnRefrescar = new JButton("Actualizar");
+		btnRefrescar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel_13.add(new NoticiasPanel());
+			}
+		});
+		btnRefrescar.setBounds(325, 20, 91, 23);
+		panel_5.add(btnRefrescar);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
@@ -230,8 +248,8 @@ public class PrincipalPanel extends JPanel {
 		JMenuItem mntmMenorCantidadDe = new JMenuItem("Menor cantidad de faltas");
 		mnNewMenu.add(mntmMenorCantidadDe);
 		
-		JMenu menu = new JMenu("New menu");
-		menuBar.add(menu);
+		JDateChooser dateChooser = new JDateChooser();
+		menuBar.add(dateChooser);
 		
 		JPanel panel_8 = new JPanel();
 		panel_8.setBackground(Color.WHITE);
@@ -327,6 +345,203 @@ public class PrincipalPanel extends JPanel {
 		lblModificar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblModificar.setBounds(10, 11, 378, 39);
 		panel_12.add(lblModificar);
+		
+		JPanel panel_14 = new JPanel();
+		panel_14.setBackground(Color.WHITE);
+		tabbedPane.addTab("Agregar alumno", null, panel_14, null);
+		panel_14.setLayout(null);
+		
+		JPanel panel_16 = new JPanel();
+		panel_16.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		panel_16.setBackground(new Color(176, 196, 222));
+		panel_16.setBounds(10, 11, 755, 175);
+		panel_14.add(panel_16);
+		panel_16.setLayout(null);
+		
+		JLabel lblAgregarAlumnoAl = new JLabel("Agregar alumno al sistema");
+		lblAgregarAlumnoAl.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblAgregarAlumnoAl.setBounds(10, 11, 246, 36);
+		panel_16.add(lblAgregarAlumnoAl);
+		
+		JLabel lblNombre_1 = new JLabel("Nombre:");
+		lblNombre_1.setBounds(10, 62, 46, 14);
+		panel_16.add(lblNombre_1);
+		
+		textField = new JTextField();
+		textField.setBounds(54, 59, 161, 20);
+		panel_16.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblApellido_1 = new JLabel("Apellido:");
+		lblApellido_1.setBounds(236, 62, 56, 14);
+		panel_16.add(lblApellido_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(285, 59, 146, 20);
+		panel_16.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblN = new JLabel("N\u00BA de DNI: ");
+		lblN.setBounds(10, 87, 87, 14);
+		panel_16.add(lblN);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(64, 84, 151, 20);
+		panel_16.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JButton btnAgregarAlumno = new JButton("Agregar alumno");
+		btnAgregarAlumno.setBounds(236, 116, 195, 23);
+		panel_16.add(btnAgregarAlumno);
+		
+		JLabel lblAoYDivisin = new JLabel("A\u00F1o y divisi\u00F3n:");
+		lblAoYDivisin.setBounds(225, 87, 80, 14);
+		panel_16.add(lblAoYDivisin);
+		
+		JComboBox comboBox_4 = new JComboBox();
+		comboBox_4.setBounds(309, 84, 122, 20);
+		panel_16.add(comboBox_4);
+		
+		JPanel panel_15 = new JPanel();
+		panel_15.setBackground(Color.WHITE);
+		tabbedPane.addTab("Agregar preceptor/usuario", null, panel_15, null);
+		panel_15.setLayout(null);
+		
+		JPanel panel_17 = new JPanel();
+		panel_17.setLayout(null);
+		panel_17.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		panel_17.setBackground(new Color(176, 196, 222));
+		panel_17.setBounds(10, 11, 448, 222);
+		panel_15.add(panel_17);
+		
+		JLabel lblAgregarPreceptorusuarioAl = new JLabel("Agregar preceptor/usuario al sistema");
+		lblAgregarPreceptorusuarioAl.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblAgregarPreceptorusuarioAl.setBounds(10, 11, 377, 36);
+		panel_17.add(lblAgregarPreceptorusuarioAl);
+		
+		JLabel label_2 = new JLabel("Nombre:");
+		label_2.setBounds(10, 62, 46, 14);
+		panel_17.add(label_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(66, 58, 161, 20);
+		panel_17.add(textField_3);
+		
+		JLabel label_3 = new JLabel("Apellido:");
+		label_3.setBounds(236, 62, 56, 14);
+		panel_17.add(label_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(285, 59, 146, 20);
+		panel_17.add(textField_4);
+		
+		JList list = new JList();
+		list.setBorder(new LineBorder(new Color(0, 0, 0)));
+		list.setBounds(85, 90, 118, 113);
+		panel_17.add(list);
+		
+		JButton button = new JButton(">>");
+		button.setBounds(212, 107, 77, 23);
+		panel_17.add(button);
+		
+		JButton button_1 = new JButton("<<");
+		button_1.setBounds(213, 166, 77, 23);
+		panel_17.add(button_1);
+		
+		JList list_1 = new JList();
+		list_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		list_1.setBounds(313, 91, 118, 113);
+		panel_17.add(list_1);
+		
+		JLabel lblCursosnA = new JLabel("<html>Cursos <br> a cargo:</html>");
+		lblCursosnA.setHorizontalAlignment(SwingConstants.LEFT);
+		lblCursosnA.setBounds(10, 92, 64, 81);
+		panel_17.add(lblCursosnA);
+		
+		JPanel panel_18 = new JPanel();
+		panel_18.setLayout(null);
+		panel_18.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		panel_18.setBackground(new Color(176, 196, 222));
+		panel_18.setBounds(10, 244, 448, 140);
+		panel_15.add(panel_18);
+		
+		JLabel lblDatosParaGenerar = new JLabel("Datos para generar usuario");
+		lblDatosParaGenerar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDatosParaGenerar.setBounds(10, 11, 377, 36);
+		panel_18.add(lblDatosParaGenerar);
+		
+		JLabel lblNombreDeUsuario = new JLabel("Nombre de usuario:");
+		lblNombreDeUsuario.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNombreDeUsuario.setBounds(10, 48, 134, 14);
+		panel_18.add(lblNombreDeUsuario);
+		
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
+		lblContrasea.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblContrasea.setBounds(10, 73, 134, 14);
+		panel_18.add(lblContrasea);
+		
+		JLabel lblDireccinDeEmail_1 = new JLabel("Direcci\u00F3n de e-mail:");
+		lblDireccinDeEmail_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDireccinDeEmail_1.setBounds(10, 98, 134, 14);
+		panel_18.add(lblDireccinDeEmail_1);
+		
+		textField_5 = new JTextField();
+		textField_5.setBounds(154, 45, 284, 20);
+		panel_18.add(textField_5);
+		textField_5.setColumns(10);
+		
+		textField_6 = new JTextField();
+		textField_6.setBounds(154, 70, 284, 20);
+		panel_18.add(textField_6);
+		textField_6.setColumns(10);
+		
+		textField_7 = new JTextField();
+		textField_7.setBounds(154, 95, 284, 20);
+		panel_18.add(textField_7);
+		textField_7.setColumns(10);
+		
+		JPanel panel_19 = new JPanel();
+		panel_19.setLayout(null);
+		panel_19.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		panel_19.setBackground(new Color(176, 196, 222));
+		panel_19.setBounds(468, 11, 297, 222);
+		panel_15.add(panel_19);
+		
+		JLabel lblNivelDeAcceso_1 = new JLabel("Nivel de acceso");
+		lblNivelDeAcceso_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNivelDeAcceso_1.setBounds(10, 11, 377, 36);
+		panel_19.add(lblNivelDeAcceso_1);
+		
+		JLabel lblNivel = new JLabel("<html>\r\nNivel 1: <br>\r\nControl de ausencias, agregar alumnos.<br><br>\r\nNivel 2: <br>\r\nControl de ausencias, control de alumnos, control de preceptores.<br>\r\n</html>");
+		lblNivel.setBounds(10, 47, 277, 87);
+		panel_19.add(lblNivel);
+		
+		JLabel lblSeleccionaUnNivel = new JLabel("Selecciona un nivel:");
+		lblSeleccionaUnNivel.setBounds(10, 194, 131, 14);
+		panel_19.add(lblSeleccionaUnNivel);
+		
+		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setBounds(151, 191, 93, 20);
+		panel_19.add(comboBox_3);
+		
+		JPanel panel_20 = new JPanel();
+		panel_20.setLayout(null);
+		panel_20.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		panel_20.setBackground(new Color(176, 196, 222));
+		panel_20.setBounds(468, 244, 297, 140);
+		panel_15.add(panel_20);
+		
+		JLabel lblTodoListo = new JLabel("Todo listo...");
+		lblTodoListo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblTodoListo.setBounds(10, 11, 377, 36);
+		panel_20.add(lblTodoListo);
+		
+		JButton btnAgregarAlSistema = new JButton("Agregar al sistema");
+		btnAgregarAlSistema.setBounds(166, 106, 121, 23);
+		panel_20.add(btnAgregarAlSistema);
+	
 		
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {

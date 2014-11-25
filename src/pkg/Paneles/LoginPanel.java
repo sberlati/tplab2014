@@ -30,10 +30,8 @@ public class LoginPanel extends JPanel  {
 	
 	private JTextField txtUsuario;
 	private JPasswordField txtPassword;
-	private FramePrincipal parent;
 	
 	public LoginPanel(FramePrincipal owner) {
-		this.parent = owner;
 		setLayout(null);
 		setSize(260, 363);
 		JLabel lblIniciarSesin = new JLabel("Iniciar sesi\u00F3n");
@@ -75,9 +73,8 @@ public class LoginPanel extends JPanel  {
 		btnConectar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				UsuarioDAO udao = new UsuarioDAO();
-				if(udao.usuarioExiste(txtUsuario.getText())) {
-					System.out.println(udao.obtenerPassword(txtUsuario.getText()));
-					if(udao.obtenerPassword(txtUsuario.getText()).equals(new String(txtPassword.getPassword()))) {
+				if(udao.usuarioExiste(txtUsuario.getText())) { //Checkeo si el usuario existe	
+					if(udao.obtenerPassword(txtUsuario.getText()).equals(new String(txtPassword.getPassword()))) { //Si las contraseñas coinciden
 						Usuario usuario = new Usuario(0,txtUsuario.getText(),0,0,null, null);
 						PrincipalPanel pp = new PrincipalPanel(owner, usuario);
 						owner.setContentPane(pp);
